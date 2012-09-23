@@ -1,0 +1,19 @@
+{
+  "name": "variance",
+  "version": "0.0.0",
+  "description": "backoffice for persistance objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/Users/chbm/Dropbox/git-repos/variance/"
+  },
+  "keywords": [
+    "backoffice",
+    "persistance"
+  ],
+  "author": "Carlos Morgado",
+  "license": "BSD"
+}
