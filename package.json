@@ -15,5 +15,10 @@
     "persistance"
   ],
   "author": "Carlos Morgado",
-  "license": "BSD"
+  "license": "BSD",
+
+	"dependencies": {
+		"socket.io": "*",
+		"connect": "*"
+	}
 }
