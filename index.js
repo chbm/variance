@@ -93,10 +93,9 @@ module.exports = function (resources, options) {
 		});
 	});
 	self.io = socketio.listen(self.app); 
-	self.app.listen(options.port || 8080);
+	self.app.listen(options.port || 8080, options.host || '127.0.0.1');
 
 	self.io.on('connection', function (socket) {
-		console.log('--- NEW CONNECTION');
 		socket.on('exec', function(type, action, obj, cb) {
 			var resource = self.resources[type]
 				, fn = Ops[action];
