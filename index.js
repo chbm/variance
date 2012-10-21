@@ -74,18 +74,27 @@ module.exports = function (resources, options) {
 
 		list: function (resource, payload, cb) {
 			//if(typeof cb !== 'function ') return;
-			cb(null, resources);
+			cb(null, self.resourcesA);
 		},
 	}
 
 	resources = resources || [];
 	if(!Array.isArray(resources)) resources = [resources];
+	self.resourcesA = resources.map(function (x) {
+		var o = {};
+		for(var i in x) {
+			o[i] = x[i];
+		}
+		o._persisttype = x._persisttype;
+		o._persistschema = x._persistschema;
+		return o;
+	});
 	options = options || {};
 
 	self.root = '/variance/';
 	self.static = connect.static('lib/html');
 	self.resources = {};
-	resources.forEach(function(x) {self.resources[x._persisttype] = x});
+	resources.forEach(function(x) {self.resources[x._persisttype] = x;});
 
 	self.app = http.createServer(function (req, res) {
 		self.static(req, res, function () {
@@ -94,6 +103,8 @@ module.exports = function (resources, options) {
 	});
 	self.io = socketio.listen(self.app); 
 	self.app.listen(options.port || 8080, options.host || '127.0.0.1');
+
+	console.log('started variance on ', options.host || '127.0.0.1', ':', options.port || 8080);
 
 	self.io.on('connection', function (socket) {
 		socket.on('exec', function(type, action, obj, cb) {
