@@ -92,7 +92,7 @@ module.exports = function (resources, options) {
 	options = options || {};
 
 	self.root = '/variance/';
-	self.static = connect.static('lib/html');
+	self.static = connect.static(__dirname + '/lib/html');
 	self.resources = {};
 	resources.forEach(function(x) {self.resources[x._persisttype] = x;});
 
